@@ -1,0 +1,5 @@
+class AddSecretToIdentities < ActiveRecord::Migration[5.0]
+  def change
+    add_column :identities, :secret, :string
+  end
+end

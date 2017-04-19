@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create_by_provider
     user = User.find_for_oauth(env["omniauth.auth"], current_user)
     if user.persisted?
-      render json: {status: 'User created successfully', user: user, auth_token: JsonWebToken.encode({user_id: user.id})}, status: :created
+      render json: {status: 'User created successfully', user: user, auth: env['omniauth.auth'], auth_token: JsonWebToken.encode({user_id: user.id})}, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end

@@ -12,6 +12,8 @@ class User < ApplicationRecord
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
     user = identity.user
+    access_token = auth.credentials.token
+    secret = auth.credentials.secret
 
     # Create user if already not present
     if user.nil?
@@ -32,8 +34,10 @@ class User < ApplicationRecord
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
-      identity.save!
     end
+    identity.access_token = access_token
+    identity.secret = secret
+    identity.save!
     user
   end
 end

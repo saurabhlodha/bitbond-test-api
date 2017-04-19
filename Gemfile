@@ -14,6 +14,8 @@ gem 'devise'
 gem 'jwt'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'koala'
+gem 'twitter'
 
 group :development, :test do
   gem 'byebug', platform: :mri
