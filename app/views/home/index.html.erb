@@ -1,2 +1,24 @@
-Welcome saurabh
-<%= p request.env["omniauth.auth"] %>
+Hello <%= p request.env["omniauth.auth"] ? request.env["omniauth.auth"].extra.raw_info.name : 'there' %>! <br>
+
+<%= link_to 'Login to facebook', "/auth/facebook" %> <br>
+<%= link_to 'Login to twitter', "/auth/twitter" %> <br>
+
+<% if @user %>
+  <p>You can use this token to set Authorization header for the Api's: <span class='blue'><%= @token[:auth_token] %></span><p>
+    <p>And your user id : <span class='blue'> <%= @user.id %> </span></p>
+  <p> I have listed down the available api's for you. (p.s. don't forget to use the authorization header.)</p>
+  <p class='blue'>GET  <%= accounts_url(email: @user) %></p>
+  <% if @user.identities.find_by_provider('facebook') %>
+    <p class='blue'>GET <%= provider_url(email: @user, provider: 'facebook') %> </p>
+  <% end %>
+  <% if @user.identities.find_by_provider('twitter') %>
+    <p class='blue'>GET  <%= provider_url(email: @user, provider: 'twitter') %></p>
+  <% end %>
+  <p class='blue'>GET  <%= connections_url(email: @user) %></p>
+<% end %>
+
+<style>
+  .blue {
+    color: blue
+  }
+</style>

@@ -1,24 +1,10 @@
-# README
+# Bitbond assignment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Environment variable we'll need to add :
 
-Things you may want to cover:
+  1. FACEBOOK_KEY
+  2. FACEBOOK_SECRET
+  3. TWITTER_KEY
+  4. TWITTER_SECRET
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Your're good to start development :-)

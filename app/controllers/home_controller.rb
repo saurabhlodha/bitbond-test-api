@@ -1,7 +1,6 @@
-class HomeController < ActionController::Base
-  def index
-  end
+class HomeController < ApplicationController
+	skip_before_filter :authenticate_request!
 
-  def login
+  def index
   end
 end

@@ -11,11 +11,12 @@ class UsersController < ApplicationController
   end
 
   def create_by_provider
-    user = User.find_for_oauth(env["omniauth.auth"], current_user)
-    if user.persisted?
-      render json: {status: 'User created successfully', user: user, auth: env['omniauth.auth'], auth_token: JsonWebToken.encode({user_id: user.id})}, status: :created
+    @user = User.find_for_oauth(env["omniauth.auth"], current_user)
+    if @user.persisted?
+      @token = payload(@user)
+      render "home/index", status: :created
     else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+      render json: { errors: @user.errors.full_messages }, status: :bad_request
     end
   end
 

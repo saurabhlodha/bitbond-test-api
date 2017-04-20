@@ -6,12 +6,11 @@ Rails.application.routes.draw do
   end
   controller :home do
     get :index
-    get :login
   end
   get 'auth/:provider/callback', to: 'users#create_by_provider'
   get 'auth/failure', to: redirect('/')
   root 'home#index'
-  get '/api/:email/accounts', to: 'accounts#index'
-  get '/api/:email/accounts/:provider', to: 'accounts#provider'
-  get '/api/:email/connections', to: 'accounts#connections'
+  get '/api/:email/accounts', to: 'accounts#index', as: :accounts
+  get '/api/:email/accounts/:provider', to: 'accounts#provider', as: :provider
+  get '/api/:email/connections', to: 'accounts#connections', as: :connections
 end

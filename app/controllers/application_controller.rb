@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   attr_reader :current_user
   before_filter :authenticate_request!
 
@@ -11,6 +11,14 @@ class ApplicationController < ActionController::API
     @current_user = User.find(auth_token[:user_id])
   rescue JWT::VerificationError, JWT::DecodeError
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+  end
+
+  def payload(user)
+    return nil unless user and user.id
+    {
+      auth_token: JsonWebToken.encode({user_id: user.id}),
+      user: user
+    }
   end
 
   private
